@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-   <link rel='styleSheet' href='inventory.css'>
+   <link rel='styleSheet' href="style.css">
   </head>
 <body>
- <h1>Mitchell's Simple Inventory App</h1> 
- <form>
-     my form
+ <h1>Mitchell's BrewDay Inventory App</h1> 
+ <form id='addItem' method='POST'>
+   <h3>Add an item!</h3>
+   <label for="item_name"> Item Name:
+    <input type='text' name='item_name' id='item_name' placeholder="Item Name" required/>
+  </label>
+  <label for="quantity">Quantity:
+    <input type="text" name='quantity' id='quantity' placeholder="Quantity" required/>
+  </label>
+  <label>Color:
+    <input type='text' name='color' id='color' placeholder="Color">
+  </label>
+  <label> Alpha Acid %:
+    <input type='text' name='acid' id='acid' placeholder="Alpha Acid %">
+  </label>
+  <input type="Submit" value="Submit">
  </form>
 
  <script src='index.js'></script>
