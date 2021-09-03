@@ -93,7 +93,7 @@ function buttonEvent(button, item, quantInput, paragraph){
     button.addEventListener('click', e => {
         e.preventDefault()
         if(quantInput.value < 0){
-        paragraph.textContent = "Quantity:  " + `${item.quantity -= quantInput.value}`
+        paragraph.textContent = "Quantity:  " + `${item.quantity -= (quantInput.value *-1)}`
     }else if(quantInput.value > 0){
         paragraph.textContent = "Quantity:  " + (item.quantity -= (quantInput.value *-1))
     }
