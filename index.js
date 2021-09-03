@@ -92,13 +92,14 @@ let  newInventoryItem = {
 function buttonEvent(button, item, quantInput, paragraph){
     button.addEventListener('click', e => {
         e.preventDefault()
-        if(quantInput.value < 0){
+        if(`${item.quantity -= (quantInput.value *-1)}` <= 0){
+            alert('NOT ENOUGH IN INVENTORY')
+        }else if(quantInput.value < 0 && `${item.quantity -= (quantInput.value *-1)}` >= 0){
         paragraph.textContent = "Quantity:  " + `${item.quantity -= (quantInput.value *-1)}`
-    }else if(quantInput.value > 0){
+        }else if(quantInput.value > 0){
         paragraph.textContent = "Quantity:  " + (item.quantity -= (quantInput.value *-1))
-    }
+        }
     quantInput.value = ''
     }
-    
     )
 }
