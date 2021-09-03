@@ -6,6 +6,13 @@
       "quantity": 20,
       "color": "green",
       "alphaAcid": "10%"
+    },
+    {
+      "itemName": "beer",
+      "quantity": "1",
+      "color": "tan",
+      "alphaAcid": "4",
+      "id": 2
     }
   ]
 }

@@ -22,36 +22,38 @@ fetchItem()
 
 //below we are appending our added items to the page and adding event listeners
 function appendItem(item){
-    const inventoryDiv = document.createElement('div')
+    let inventoryDiv = document.createElement('div')
     inventoryDiv.className = 'inventoryDiv'
     inventoryDiv.textContent = "Item Name:  " + item.itemName
     document.querySelector("body > section").append(inventoryDiv)
 
     const quantDiv = document.createElement('div')
     //add <p> for text content to get out of string??
-    const paragraph = document.createElement('p')
+    let paragraph = document.createElement('p')
     paragraph.textContent = "Quantity:  " + item.quantity
+    console.log(item.quantity)
     quantDiv.append(paragraph)
     inventoryDiv.append(quantDiv)
     //createInput(quantDiv, item)
 //add input <div>
-    const quantInput = document.createElement('input')
+    let quantInput = document.createElement('input')
     quantInput.id = item.id
     quantInput.class = 'quantityInput'
     quantInput.placeholder = 'Amnt to Add or Remove'
     quantInput.type = 'text'
-    const button = document.createElement('button')
+    let button = document.createElement('button')
     button.textContent = 'Add/Remove'
     button.id = item.id
     quantDiv.append(quantInput)
     quantDiv.append(button)
-    button.addEventListener('click', e => paragraph.textContent = "Quantity:  " + `${item.quantity += quantInput.value}`)
+    button.addEventListener('click', e => {paragraph.textContent =  item.quantity += quantInput.value
+    })
     
-    const colorDiv = document.createElement('div')
+    let colorDiv = document.createElement('div')
     colorDiv.textContent = "Color:  " + item.color
     inventoryDiv.append(colorDiv)
 
-    const acidDiv = document.createElement('div')
+    let acidDiv = document.createElement('div')
     acidDiv.textContent = "Alpha Acid %:  " + item.alphaAcid
     inventoryDiv.append(acidDiv)
 }
@@ -82,5 +84,6 @@ let  newInventoryItem = {
         color: document.querySelector("#color").value,
         alphaAcid: document.querySelector("#acid").value
      }
+     appendItem(newInventoryItem)
     postItem(newInventoryItem)
 }
