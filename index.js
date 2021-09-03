@@ -5,7 +5,7 @@ function postItem(obj){
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Accept: "application/json"
+        "Accept": "application/json"
       },
       body: JSON.stringify(obj)
   })
@@ -57,17 +57,16 @@ function createInput(element, item, paragraph){
     button.addEventListener('click', e => console.log(e))
 }
 // handle adding an item to inventory
-document.querySelector("#addItem > input[type=Submit]").addEventListener('click', e => console.log(e))
-// function addToInventory(obj){
-//     e.preventDefault()
+document.querySelector("#addItem > input[type=Submit]").addEventListener('click', e => addToInventory(e))
+function addToInventory(e){
+    e.preventDefault()
 
-// let  newInventoryItem = {
-//             itemName:  (selected input val),
-//             quantity:  (selected input val),
-//             color: (selected input val),
-//             alphaAcid: (selected input val)
-// }
+let  newInventoryItem = {
+            itemName: document.querySelector("#item_name").value,
+            quantity: document.querySelector("#quantity").value,
+            color: document.querySelector("#color").value,
+            alphaAcid: document.querySelector("#acid").value
+}
 
-// call our post function here with object from inputs
-//     postItem(newInventoryItem)
-// }
+    postItem(newInventoryItem)
+}

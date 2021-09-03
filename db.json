@@ -1,16 +1,18 @@
 {
-    "beerInv": [
-        {
-            "id": 1,
-            "itemName": "TEST",
-            "quantity": 20,
-            "color": "green",
-            "alphaAcid": "10%"
-        }
-    ]
-
+  "beerInv": [
+    {
+      "id": 1,
+      "itemName": "TEST",
+      "quantity": 20,
+      "color": "green",
+      "alphaAcid": "10%"
+    },
+    {
+      "itemName": "beer",
+      "quantity": "1",
+      "color": "tan",
+      "alphaAcid": "5",
+      "id": 2
+    }
+  ]
 }
-
-
-
-   
