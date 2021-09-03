@@ -9,23 +9,26 @@ fetchItem()
 
 //below we are appending our added items to the page and adding event listeners
 function appendItem(item){
-    const invDiv = document.createElement('form')
-    invDiv.className = 'invDiv'
-    invDiv.textContent = "Item Name:  " + item.itemName
-    document.querySelector("body > section").append(invDiv)
+    const inventoryDiv = document.createElement('div')
+    inventoryDiv.className = 'inventoryDiv'
+    inventoryDiv.textContent = "Item Name:  " + item.itemName
+    document.querySelector("body > section").append(inventoryDiv)
 
     const quantDiv = document.createElement('div')
-    quantDiv.textContent = "Quantity:  " + item.quantity
+    //add <p> for text content to get out of string??
+    const paragraph = document.createElement('p')
+    paragraph.textContent = "Quantity:  " + `${item.quantity}`
+    quantDiv.append(paragraph)
+    inventoryDiv.append(quantDiv)
     createInput(quantDiv, item)
-    invDiv.append(quantDiv)
-
+    
     const colorDiv = document.createElement('div')
     colorDiv.textContent = "Color:  " + item.color
-    invDiv.append(colorDiv)
+    inventoryDiv.append(colorDiv)
 
     const acidDiv = document.createElement('div')
     acidDiv.textContent = "Alpha Acid %:  " + item.alphaAcid
-    invDiv.append(acidDiv)
+    inventoryDiv.append(acidDiv)
 }
 
 //created our input & submit that will go along with each individual inventory item
@@ -35,15 +38,16 @@ function createInput(element, item){
     quantInput.class = 'quantityInput'
     quantInput.placeholder = 'Amnt to Add or Remove'
     quantInput.type = 'number'
-    const submit = document.createElement('input')
-    submit.type = 'submit'
-    submit.value = 'Add/Remove'
-    submit.id = item.id
+    const button = document.createElement('button')
+    button.textContent = 'Add/Remove'
+    button.id = item.id
     element.append(quantInput)
-    element.append(submit)
-    submit.addEventListener('click', e => {
-        e.preventDefault()
-        console.log(e)})
-}
+    element.append(button)
+    // button.addEventListener('click', e => {
+    //     e.preventDefault()
+    //     element.textContent = "Quantity:  " + `${item.quantity += quantInput.value}`
 
+    //     }
+    //)
+}
 //add inventory item event listener to add/remove quantity
