@@ -1,0 +1,11 @@
+{
+    "beerInv": [
+      {
+        "id": 1,
+        "itemName": "hops",
+        "quantity": "20",
+        "color": "green",
+        "alphaAcid" : "10%"
+      }
+    ]
+  }    
