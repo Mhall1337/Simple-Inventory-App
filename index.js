@@ -22,7 +22,7 @@ fetchItem()
 
 //below we are appending our added items to the page and adding event listeners
 function appendItem(item){
-    let inventoryDiv = document.createElement('div')
+    let inventoryDiv = document.createElement('form')
     inventoryDiv.className = 'inventoryDiv'
     inventoryDiv.textContent = "Item Name:  " + item.itemName
     document.querySelector("body > section").append(inventoryDiv)
@@ -46,13 +46,14 @@ function appendItem(item){
     button.id = item.id
     quantDiv.append(quantInput)
     quantDiv.append(button)
-    button.addEventListener('click', e => {paragraph.textContent =  item.quantity += quantInput.value
-    })
-    
+
+    //add button event listener
+    buttonEvent(button, item, quantInput, paragraph)
+    //create color <div>
     let colorDiv = document.createElement('div')
     colorDiv.textContent = "Color:  " + item.color
     inventoryDiv.append(colorDiv)
-
+    //create Alpha Acid <div>
     let acidDiv = document.createElement('div')
     acidDiv.textContent = "Alpha Acid %:  " + item.alphaAcid
     inventoryDiv.append(acidDiv)
@@ -86,4 +87,18 @@ let  newInventoryItem = {
      }
      appendItem(newInventoryItem)
     postItem(newInventoryItem)
+}
+
+function buttonEvent(button, item, quantInput, paragraph){
+    button.addEventListener('click', e => {
+        e.preventDefault()
+        if(quantInput.value < 0){
+        paragraph.textContent = "Quantity:  " + `${item.quantity -= quantInput.value}`
+    }else if(quantInput.value > 0){
+        paragraph.textContent = "Quantity:  " + (item.quantity -= (quantInput.value *-1))
+    }
+    quantInput.value = ''
+    }
+    
+    )
 }
