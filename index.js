@@ -1,16 +1,18 @@
 console.log('hello')
-
+//post an item
 function postItem(obj){
     fetch('http://localhost:3000/beerInv',{
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        "Accept": "application/json"
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(obj)
   })
+  .then(res => res.json())
+  .then(beerObj => console.log(beerObj))
   }
 
+//fetch an item
 function fetchItem(){
     fetch("http://localhost:3000/beerInv")
     .then((resp) => resp.json())
@@ -28,10 +30,22 @@ function appendItem(item){
     const quantDiv = document.createElement('div')
     //add <p> for text content to get out of string??
     const paragraph = document.createElement('p')
-    paragraph.textContent = "Quantity:  " + `${item.quantity}`
+    paragraph.textContent = "Quantity:  " + item.quantity
     quantDiv.append(paragraph)
     inventoryDiv.append(quantDiv)
-    createInput(quantDiv, item, paragraph)
+    //createInput(quantDiv, item)
+//add input <div>
+    const quantInput = document.createElement('input')
+    quantInput.id = item.id
+    quantInput.class = 'quantityInput'
+    quantInput.placeholder = 'Amnt to Add or Remove'
+    quantInput.type = 'text'
+    const button = document.createElement('button')
+    button.textContent = 'Add/Remove'
+    button.id = item.id
+    quantDiv.append(quantInput)
+    quantDiv.append(button)
+    button.addEventListener('click', e => paragraph.textContent = "Quantity:  " + `${item.quantity += quantInput.value}`)
     
     const colorDiv = document.createElement('div')
     colorDiv.textContent = "Color:  " + item.color
@@ -43,30 +57,30 @@ function appendItem(item){
 }
 
 //created our input & submit that will go along with each individual inventory item
-function createInput(element, item, paragraph){
-    const quantInput = document.createElement('input')
-    quantInput.id = item.id
-    quantInput.class = 'quantityInput'
-    quantInput.placeholder = 'Amnt to Add or Remove'
-    quantInput.type = 'text'
-    const button = document.createElement('button')
-    button.textContent = 'Add/Remove'
-    button.id = item.id
-    element.append(quantInput)
-    element.append(button)
-    button.addEventListener('click', e => console.log(e))
-}
+// function createInput(element, item){
+//     const quantInput = document.createElement('input')
+//     quantInput.id = item.id
+//     quantInput.class = 'quantityInput'
+//     quantInput.placeholder = 'Amnt to Add or Remove'
+//     quantInput.type = 'text'
+//     const button = document.createElement('button')
+//     button.textContent = 'Add/Remove'
+//     button.id = item.id
+//     element.append(quantInput)
+//     element.append(button)
+//     button.addEventListener('click', e => console.log(e))
+
+//     //path[1].childNodes[1].value
+// }
 // handle adding an item to inventory
 document.querySelector("#addItem > input[type=Submit]").addEventListener('click', e => addToInventory(e))
 function addToInventory(e){
     e.preventDefault()
-
 let  newInventoryItem = {
-            itemName: document.querySelector("#item_name").value,
-            quantity: document.querySelector("#quantity").value,
-            color: document.querySelector("#color").value,
-            alphaAcid: document.querySelector("#acid").value
-}
-
+        itemName: document.querySelector("#item_name").value,
+        quantity: document.querySelector("#quantity").value,
+        color: document.querySelector("#color").value,
+        alphaAcid: document.querySelector("#acid").value
+     }
     postItem(newInventoryItem)
 }
