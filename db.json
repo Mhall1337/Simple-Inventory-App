@@ -3,16 +3,30 @@
     {
       "id": 1,
       "itemName": "TEST",
-      "quantity": 20,
+      "quantity": 26,
       "color": "green",
       "alphaAcid": "10%"
     },
     {
       "itemName": "beer",
-      "quantity": "1",
+      "quantity": 10,
       "color": "tan",
       "alphaAcid": "4",
       "id": 2
+    },
+    {
+      "itemName": "Bud Light",
+      "quantity": 6,
+      "color": "light brown",
+      "alphaAcid": "4",
+      "id": 3
+    },
+    {
+      "itemName": "budweiser",
+      "quantity": 36,
+      "color": "brown",
+      "alphaAcid": "5",
+      "id": 4
     }
   ]
 }
