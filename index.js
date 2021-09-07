@@ -1,6 +1,5 @@
 
-console.log('hello')
-//patch an item
+//patch a beer
 function patchItem(obj){
     fetch(`http://localhost:3000/beerInv/${obj.id}`,{
       method: 'PATCH',
@@ -10,10 +9,10 @@ function patchItem(obj){
       body: JSON.stringify(obj)
   })
   .then(res => res.json())
-  .then(beerObj => console.log(beerObj))
+  //.then(beerObj => console.log(beerObj))
   }
 
-//post an item
+//post a beer
 function postItem(obj){
     fetch('http://localhost:3000/beerInv',{
       method: 'POST',
@@ -26,7 +25,7 @@ function postItem(obj){
   .then(beerObj => console.log(beerObj))
   }
 
-//fetch an item
+//fetch a beer
 function fetchItem(){
     fetch("http://localhost:3000/beerInv")
     .then((resp) => resp.json())
@@ -34,12 +33,22 @@ function fetchItem(){
 }
 fetchItem()
 
+function deleteItem(id){
+    fetch(`http://localhost:3000/beerInv/${id}`,{
+        method: 'DELETE',
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(beer => console.log(beer))
+}
 
 //below we are appending our added items to the page and adding event listeners
 function appendItem(item){
     let inventoryForm = document.createElement('form')
     inventoryForm.className = 'inventoryForm'
-    inventoryForm.textContent = "Item Name:  " + item.itemName
+    inventoryForm.textContent = "Beer Name:  " + item.beerName
     document.querySelector("body > section").append(inventoryForm)
 
 //<div> containing <button>, <input>, and quantity <p>
@@ -63,66 +72,55 @@ function appendItem(item){
     quantDiv.append(quantInput)
     quantDiv.append(button)
 
-//create color <div>
-    let colorDiv = document.createElement('div')
-    colorDiv.textContent = "Color:  " + item.color
-    inventoryForm.append(colorDiv)
+//create style <div>
+    let styleDiv = document.createElement('div')
+    styleDiv.textContent = "Style:  " + item.style
+    inventoryForm.append(styleDiv)
 
 //create Alpha Acid <div>
-    let acidDiv = document.createElement('div')
-    acidDiv.textContent = "Alpha Acid %:  " + item.alphaAcid
-    inventoryForm.append(acidDiv)  
+    let alcoholPercent = document.createElement('div')
+    alcoholPercent.textContent = "Alcohol %:  " + item.abv
+    inventoryForm.append(alcoholPercent)  
+
+//create deleteBeer button
+    const deleteBeer = document.createElement('button')
+    inventoryForm.append(deleteBeer)
+    deleteBeer.textContent = 'Delete From Inventory'
+    
+//deletes the beer from our page    
+    deleteButton(deleteBeer, item)
 
 //button event listener with PATCH
-    buttonEvent(button, item, quantInput, paragraph)
+    addRemoveButton(button, item, quantInput, paragraph)  
 }
 
-//     button.addEventListener('click', e => {
-//         e.preventDefault()
-//         console.log(item.quantity)
-//         paragraph.textContent = "Quantity:  " + (item.quantity -= (quantInput.value *-1))
-//     patchItem(item)   
-//     quantInput.value = ''
-//     }
-//     )
-// }
-
-// handle adding an item to inventory database
+// handle adding an item to inventory database with 'click' event
 document.querySelector("#addItem > input[type=Submit]").addEventListener('click', e => addToInventory(e))
 function addToInventory(e){
     e.preventDefault()
 let  newInventoryItem = {
-        itemName: document.querySelector("#item_name").value,
+        beerName: document.querySelector("#item_name").value,
         quantity: document.querySelector("#quantity").value,
-        color: document.querySelector("#color").value,
-        alphaAcid: document.querySelector("#acid").value
+        style: document.querySelector("#style").value,
+        abv: document.querySelector("#alcohol").value
      }
      appendItem(newInventoryItem)
-    postItem(newInventoryItem)
+     postItem(newInventoryItem)
 }
 
-function lowItemColorChange(item){
-   const forms = document.querySelectorAll('.inventoryForm')
-   //const lowForms = forms.filter(form => item.quantity <= 6)
-   console.log(forms.p)
-   
-//    forms.forEach(form => {
-//         if(item.quantity <= 6){
-//         form.style.background = 'red'
-//         }   
-//     })
-}
-
-
-
-// button event handler
-function buttonEvent(button, item, quantInput, paragraph){
+// Add/Remove button event function
+function addRemoveButton(button, item, quantInput, paragraph){
     button.addEventListener('click', e => {
         e.preventDefault()
         paragraph.textContent = "Quantity:  " + (item.quantity -= (quantInput.value *-1))
-        console.log(item.quantity)
     quantInput.value = ''
     patchItem(item)
-    }
-    )
+    })
+}
+
+function deleteButton(deleteBeer, item){
+    deleteBeer.addEventListener('click', e =>{
+        deleteBeer.parentElement.remove()
+        deleteItem(item.id)
+    })
 }

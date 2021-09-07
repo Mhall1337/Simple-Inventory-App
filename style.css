@@ -3,10 +3,13 @@ h1{
     color: olive;
 }
 #addItem{
+    background-color: white;
     text-align: center;
+    height: 6rem;
     
 }
 .inventoryForm{
+  background-color: white;
   text-align: center;
   border: black solid 1px;
   padding: 1rem;
@@ -14,4 +17,7 @@ h1{
   height: 10rem;
   display: inline-grid;
   margin: 1rem 2rem;
+}
+body{
+    background-image: url("https://images.unsplash.com/photo-1608270586620-248524c67de9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGJlZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80") ;
 }
