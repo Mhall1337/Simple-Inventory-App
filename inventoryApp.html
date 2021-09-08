@@ -2,26 +2,28 @@
 <html>
   <head>
    <link rel='styleSheet' href="style.css">
+   <title>Beer Inventory App </title>
   </head>
 <body>
  <h1>Mitchell's BrewDay Inventory App</h1> 
- <h4>To operate, run (json-server --watch db.json) in terminal</h4>
- <form id='addItem' method='POST'>
+ <!-- To operate, run (json-server --watch db.json) in terminal-->
+ 
+ <div id='addItem'>
    <h3>Add an item!</h3>
-   <label for="item_name"> Beer Name:
-    <input type='text' name='item_name' id='item_name' placeholder="Enter Beer Name" required/>
+   <label for="beerName"> Beer Name:
+    <input type='text' name='beerName' id='beerName' placeholder="Enter Beer Name" required/>
   </label>
   <label for="quantity">Quantity:
     <input type="number" name='quantity' id='quantity' placeholder="Enter Quantity" required/>
   </label>
   <label>Style:
-    <input type='text' name='color' id='style' placeholder="Enter Style">
+    <input type='text' name='style' id='style' placeholder="Enter Style" required>
   </label>
   <label> Alcohol %:
-    <input type='text' name='Alcohol' id='alcohol' placeholder="Enter Alcohol %">
+    <input type='text' name='alcohol' id='alcohol' placeholder="Enter Alcohol %" required>
   </label>
-  <input type="Submit" value="Submit">
- </form>
+  <input type="Submit" value="Add">
+</div>
 
 
 <section>

@@ -2,16 +2,16 @@
   "beerInv": [
     {
       "beerName": "Bud Light",
-      "quantity": 0,
-      "style": "Lager",
-      "abv": "4",
+      "quantity": "24",
+      "style": "lager",
+      "alcohol": "4",
       "id": 1
     },
     {
       "beerName": "Miller Light",
-      "quantity": "24",
+      "quantity": "100",
       "style": "Lager",
-      "abv": "4",
+      "alcohol": "4",
       "id": 2
     }
   ]

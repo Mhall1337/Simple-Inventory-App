@@ -7,8 +7,8 @@ function patchItem(obj){
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(obj)
-  })
-  .then(res => res.json())
+     })
+    .then(res => res.json())
   //.then(beerObj => console.log(beerObj))
   }
 
@@ -22,7 +22,7 @@ function postItem(obj){
       body: JSON.stringify(obj)
   })
   .then(res => res.json())
-  .then(beerObj => console.log(beerObj))
+  //.then(beerObj => console.log(beerObj))
   }
 
 //fetch a beer
@@ -33,6 +33,7 @@ function fetchItem(){
 }
 fetchItem()
 
+//deletes item from DB
 function deleteItem(id){
     fetch(`http://localhost:3000/beerInv/${id}`,{
         method: 'DELETE',
@@ -41,31 +42,33 @@ function deleteItem(id){
         }
     })
     .then(res => res.json())
-    .then(beer => console.log(beer))
+    //.then(beer => console.log(beer))
 }
 
-//below we are appending our added items to the page and adding event listeners
+//below we are appending our added items to the page
 function appendItem(item){
-    let inventoryForm = document.createElement('form')
-    inventoryForm.className = 'inventoryForm'
-    inventoryForm.textContent = "Beer Name:  " + item.beerName
-    document.querySelector("body > section").append(inventoryForm)
+    let inventoryDiv = document.createElement('div')
+    inventoryDiv.className = 'inventoryDiv'
+    inventoryDiv.textContent = "Beer Name:  " + item.beerName
+    document.querySelector("body > section").append(inventoryDiv)
 
 //<div> containing <button>, <input>, and quantity <p>
     const quantDiv = document.createElement('div')
+    inventoryDiv.append(quantDiv)
 
 //add <p> for text content to get out of string??
     let paragraph = document.createElement('p')
     paragraph.textContent = "Quantity:  " + item.quantity
     quantDiv.append(paragraph)
-    inventoryForm.append(quantDiv)
     
 //add input <div>
     let quantInput = document.createElement('input')
     quantInput.id = item.id
     quantInput.class = 'quantityInput'
     quantInput.placeholder = 'Amnt to Add or Remove'
-    quantInput.type = 'text'
+    quantInput.type = 'number'
+   
+ //create and append the button   
     let button = document.createElement('button')
     button.textContent = 'Add/Remove'
     button.id = item.id
@@ -75,16 +78,16 @@ function appendItem(item){
 //create style <div>
     let styleDiv = document.createElement('div')
     styleDiv.textContent = "Style:  " + item.style
-    inventoryForm.append(styleDiv)
+    inventoryDiv.append(styleDiv)
 
 //create Alpha Acid <div>
     let alcoholPercent = document.createElement('div')
-    alcoholPercent.textContent = "Alcohol %:  " + item.abv
-    inventoryForm.append(alcoholPercent)  
+    alcoholPercent.textContent = "Alcohol %:  " + item.alcohol
+    inventoryDiv.append(alcoholPercent)  
 
 //create deleteBeer button
     const deleteBeer = document.createElement('button')
-    inventoryForm.append(deleteBeer)
+    inventoryDiv.append(deleteBeer)
     deleteBeer.textContent = 'Delete From Inventory'
     
 //deletes the beer from our page    
@@ -96,16 +99,20 @@ function appendItem(item){
 
 // handle adding an item to inventory database with 'click' event
 document.querySelector("#addItem > input[type=Submit]").addEventListener('click', e => addToInventory(e))
-function addToInventory(e){
-    e.preventDefault()
+function addToInventory(){
 let  newInventoryItem = {
-        beerName: document.querySelector("#item_name").value,
+        beerName: document.querySelector("#beerName").value,
         quantity: document.querySelector("#quantity").value,
         style: document.querySelector("#style").value,
-        abv: document.querySelector("#alcohol").value
+        alcohol: document.querySelector("#alcohol").value
      }
      appendItem(newInventoryItem)
      postItem(newInventoryItem)
+     //clear input fields
+      document.querySelector("#beerName").value =''
+      document.querySelector("#quantity").value =''
+      document.querySelector("#style").value =''
+      document.querySelector("#alcohol").value ='' 
 }
 
 // Add/Remove button event function
@@ -118,8 +125,10 @@ function addRemoveButton(button, item, quantInput, paragraph){
     })
 }
 
+//delete from inventory button
 function deleteButton(deleteBeer, item){
     deleteBeer.addEventListener('click', e =>{
+        e.preventDefault()
         deleteBeer.parentElement.remove()
         deleteItem(item.id)
     })
