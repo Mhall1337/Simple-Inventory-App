@@ -1,15 +1,15 @@
 {
   "beerInv": [
     {
-      "beerName": "Bud Light",
-      "quantity": "24",
-      "style": "lager",
+      "beerName": "Miller",
+      "quantity": 29,
+      "style": "Lager",
       "alcohol": "4",
       "id": 1
     },
     {
-      "beerName": "Miller Light",
-      "quantity": "100",
+      "beerName": "Bud Light",
+      "quantity": 72,
       "style": "Lager",
       "alcohol": "4",
       "id": 2

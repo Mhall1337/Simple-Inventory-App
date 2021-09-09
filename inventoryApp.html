@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-   <link rel='styleSheet' href="style.css">
+   <link rel='styleSheet' href="/Users/mitchellhall/styles.css">
    <title>Beer Inventory App </title>
   </head>
 <body>
  <h1>Mitchell's BrewDay Inventory App</h1> 
  <!-- To operate, run (json-server --watch db.json) in terminal-->
  
- <div id='addItem'>
+ <form id='addItem'>
    <h3>Add an item!</h3>
    <label for="beerName"> Beer Name:
     <input type='text' name='beerName' id='beerName' placeholder="Enter Beer Name" required/>
@@ -23,7 +23,7 @@
     <input type='text' name='alcohol' id='alcohol' placeholder="Enter Alcohol %" required>
   </label>
   <input type="Submit" value="Add">
-</div>
+ </form>
 
 
 <section>
